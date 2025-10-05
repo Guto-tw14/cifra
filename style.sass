@@ -3,6 +3,7 @@
     margin: 0
     box-sizing: border-box
 body
+    background-color: rgb(239, 239, 239)
     width: 100bw
     height: 100vh
     min-height: 100%
@@ -10,6 +11,9 @@ body
     flex-direction: column
     >section
         flex-grow: 1
+        display: flex
+        align-items: center
+        flex-direction: column
     >footer
         border-top: 1px solid black
         display: flex
@@ -24,3 +28,31 @@ body
             font-size: 20pt
             width: 40px
             height: 40px
+ul
+    display: flex
+    flex-direction: column
+    gap: 20px
+    width: 100%
+    margin: 10px 0
+    padding: 0 10px
+    li
+        border: solid 1px rgb(242, 242, 242)
+        border-top: 1px solid white
+        border-radius: 10px
+        width: 100%
+        justify-content: space-between
+        padding: 1rem 0.5rem
+        background-color: darken(rgb(255, 255, 255), 3%)
+        display: flex
+        gap: 10px
+        &:hover
+            cursor: pointer
+            background-color: white
+        img
+            background-color: darken(rgb(255, 255, 255), 10%)
+            height: 40px
+            width: 40px
+            border-radius: 5px
+        >div
+            display: flex
+            gap: 20px

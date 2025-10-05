@@ -5,6 +5,7 @@
 }
 
 body {
+  background-color: rgb(239, 239, 239);
   width: 100bw;
   height: 100vh;
   min-height: 100%;
@@ -13,6 +14,9 @@ body {
 }
 body > section {
   flex-grow: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 body > footer {
   border-top: 1px solid black;
@@ -29,4 +33,38 @@ body > footer button {
   font-size: 20pt;
   width: 40px;
   height: 40px;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin: 10px 0;
+  padding: 0 10px;
+}
+ul li {
+  border: solid 1px rgb(242, 242, 242);
+  border-top: 1px solid white;
+  border-radius: 10px;
+  width: 100%;
+  justify-content: space-between;
+  padding: 1rem 0.5rem;
+  background-color: rgb(247.35, 247.35, 247.35);
+  display: flex;
+  gap: 10px;
+}
+ul li:hover {
+  cursor: pointer;
+  background-color: white;
+}
+ul li img {
+  background-color: rgb(229.5, 229.5, 229.5);
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+}
+ul li > div {
+  display: flex;
+  gap: 20px;
 }/*# sourceMappingURL=style.css.map */
