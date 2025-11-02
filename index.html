@@ -3,15 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="manifest" href="./manifest.json">
+        <link rel="icon" href="./icons/Icon_Bird_512x512.png">
         <link rel="stylesheet" href="./style.css">
         <title>Document</title>
     </head>
     <body>
-        <section><ul id="lista-cifras"></ul></section>
+        <section id='app'><ul id="lista-cifras"></ul></section>
         <footer>
-            <button type="button"><img src="./imgs/house-regular-full.svg" alt="Casa"></button>
-            <button type="button">+</button>
+            <button type="button" id="menu"><img src="./imgs/house-regular-full.svg" alt="Casa"></button>
+            <button type="button" id="novo">+</button>
         </footer>
-        <script src="./index.js"></script>
+        <script src="./src/db.js"></script>
+        <script src="./src/index.js"></script>
     </body>
 </html>

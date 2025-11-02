@@ -1,9 +1,22 @@
+const arquivos = [
+  "./",
+  "./form.html",
+  "./cifra.html",
+  "./style.css",
+  "./sw.js",
+  "./src/db.js",
+  "./src/index.js",
+  "./src/cifra.js",
+  "./src/form.js",
+  "./manifest.json",
+  "./imgs/house-regular-full.svg"
+]
 self.addEventListener("install", (e) => {
   e.waitUntil(
     caches
       .open("v1")
       .then((cache) => {
-        cache.addAll(["./", "./script.js", "./style.css"]);
+        cache.addAll(arquivos);
         console.log("Armazenado com sucesso");
       })
       .catch((err) => {

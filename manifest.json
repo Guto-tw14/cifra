@@ -1,0 +1,18 @@
+{
+  "name": "App de Cifras",
+  "short_name": "Cifras",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e88e5",
+  "orientation": "portrait",
+  "scope": "./",
+  "description": "Cifras",
+  "icons": [
+    {
+      "src": "./icons/Icon_Bird_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

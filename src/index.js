@@ -1,11 +1,13 @@
 const ul = document.getElementById("lista-cifras");
+const novo = document.getElementById('novo')
+const app = document.getElementById('app')
 let res = null;
-let cifras = [
-  { nome: "cifra 1", autor: "augusto" },
-  { nome: "cifra 2", autor: "augusto" },
-];
 
-(function montar_ul() {
+async function montar_ul() {
+  console.log(listar());
+  
+  const cifras = await listar()
+  ul.innerHTML = ''
   cifras.forEach((c) => {
     const img = document.createElement("img");
     img.setAttribute("src", "./imgs/house-regular-full.svg");
@@ -25,11 +27,19 @@ let cifras = [
     li.appendChild(div);
     li.appendChild(btnd);
     li.addEventListener("click", () => {
-      document.location.href = "./cifra.html";
+      console.log(c.nome);
+      document.location.href = `./cifra.html?id=${c.id}`;
     });
     ul.appendChild(li);
   });
-})();
+  app.appendChild(ul)
+}
+
+montar_ul()
+
+novo.addEventListener('click', () => {
+  document.location.href = `./form.html`;
+})
 
 function registrar_sw() {
   if ("serviceWorker" in navigator) {
