@@ -2,7 +2,7 @@ const arquivos = [
   "./",
   "./form.html",
   "./cifra.html",
-  "./style.css",
+  "./css/style.css",
   "./sw.js",
   "./src/db.js",
   "./src/index.js",
