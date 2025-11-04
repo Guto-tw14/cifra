@@ -18,4 +18,5 @@ form.addEventListener('submit', (e) => {
         arquivo: arquivo.files[0]
     }
     addCifra(cifra)
+    document.location.href = "./index.html"
 })
