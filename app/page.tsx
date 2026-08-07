@@ -12,19 +12,19 @@ type IconeProps = {
 };
 
 type CifraformData = {
-    nome: string
-    link: string
-}
+  nome: string;
+  link: string;
+};
 
 type CifraFormErrors = {
-    nome?: string
-    link?: string
-}
+  nome?: string;
+  link?: string;
+};
 
 type CifraformTouched = {
-    nome?: boolean
-    link?: boolean
-}
+  nome?: boolean;
+  link?: boolean;
+};
 
 function Icone({ src, alt, x, y }: IconeProps) {
   return <Image src={src} alt={alt} width={x} height={y} draggable={false} />;
@@ -90,34 +90,33 @@ function Formulario({
       tempErrors.link = "Você precisa digitar um link!";
     }
     setErrors(tempErrors);
-    return Object.keys(tempErrors).length == 0
+    return Object.keys(tempErrors).length == 0;
   }
 
   function mudancaInput(e: ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.target;
-    const fieldName = name as keyof CifraformData
+    const fieldName = name as keyof CifraformData;
     setFormData({ ...formData, [fieldName]: value });
-    if(errors[fieldName]) {
-        setErrors({...errors, [fieldName]: ''})
+    if (errors[fieldName]) {
+      setErrors({ ...errors, [fieldName]: "" });
     }
   }
-  function desfoque(e: React.FocusEvent<HTMLInputElement>){
-    const {name} = e.target;
-    const fieldName = name as keyof CifraformData
+  function desfoque(e: React.FocusEvent<HTMLInputElement>) {
+    const { name } = e.target;
+    const fieldName = name as keyof CifraformData;
 
     setTouched((touch) => {
-      const newTouch = {...touch, [fieldName]: true}
+      const newTouch = { ...touch, [fieldName]: true };
       validarForm();
       return newTouch;
-    })
-
+    });
   }
 
-  function validarEnvio(e: React.SubmitEvent<HTMLFormElement>){
-    e.preventDefault()
-    setTouched({nome: true, link: true})
-    if(validarForm()) {
-      enviarForm(e)
+  function validarEnvio(e: React.SubmitEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setTouched({ nome: true, link: true });
+    if (validarForm()) {
+      enviarForm(e);
     }
   }
 
@@ -146,11 +145,14 @@ function Formulario({
               onBlur={desfoque}
               className={`border-2 border-neutral-400 rounded-md p-1
                     focus:outline-0 focus:border-blue-500 focus:border-2
-                  ${touched.link && errors.link && 'border-red-500'}
+                  ${touched.link && errors.link && "border-red-500"}
                   `}
             ></input>
-            {touched.nome && errors.nome &&
-            <span className="text-red-500 text-sm mt-1">Você precisa digitar um nome!</span>}
+            {touched.nome && errors.nome && (
+              <span className="text-red-500 text-sm mt-1">
+                Você precisa digitar um nome!
+              </span>
+            )}
           </label>
           <label className="flex flex-col">
             <span>Link:</span>
@@ -163,11 +165,14 @@ function Formulario({
               placeholder="Link da cifra"
               className={`border-2 border-neutral-400 rounded-md p-1
                     focus:outline-0 focus:border-blue-500 focus:border-2
-                    ${touched.link && errors.link && 'border-red-500'}
+                    ${touched.link && errors.link && "border-red-500"}
                     `}
             ></input>
-            {touched.link && errors.link &&
-            <span className="text-red-500 text-sm mt-1">Você precisa digitar um link!</span>}
+            {touched.link && errors.link && (
+              <span className="text-red-500 text-sm mt-1">
+                Você precisa digitar um link!
+              </span>
+            )}
           </label>
         </section>
         <div className="flex justify-center gap-5">
@@ -186,15 +191,46 @@ function Formulario({
     </div>
   );
 }
-function enviarForm(e: React.SubmitEvent<HTMLFormElement>) {
+function ListaCifras({ cifras }: { cifras: Cifra[] }) {
+  return (
+    <section className="flex flex-col">
+      {cifras.map((cifra) => {
+        return (
+          <div key={cifra.id} className="flex w-full">
+            <button
+            className="rounded-md bg-gray-900 p-2"
+            >
+              <Icone
+                x={40}
+                y={40}
+                src="/pencil-solid-full.svg"
+                alt="Criar cifra"
+              ></Icone>
+            </button>
+            <a
+              href={cifra.link}
+              target="_blank"
+              className="grow flex justify-start ml-1 rounded-md bg-gray-900 p-2"
+            >
+              <span
+              className="font-medium"
+              >{cifra.nome}</span>
+            </a>
+          </div>
+        );
+      })}
+    </section>
+  );
+}
+function enviarForm(e: React.SubmitEvent<HTMLFormElement>): CifraformData {
   e.preventDefault();
   const dados: FormData = new FormData(e.currentTarget);
-  const valores: object = Object.fromEntries(dados.entries());
-  console.log(dados);
-  console.log(valores);
+  const valores = Object.fromEntries(dados.entries()) as CifraformData;
+  return valores;
 }
 export default function Main() {
   const [formulario, setFormulario] = useState(false);
+  const [Cifras, setCifras] = useState<Cifra[]>([]);
   return (
     <main className="flex flex-col m-1 justify-center rounded-md">
       <Cabecalho abrirForm={setFormulario} />
@@ -203,11 +239,19 @@ export default function Main() {
         <Formulario
           fecharForm={() => setFormulario(false)}
           enviarForm={(e) => {
-            enviarForm(e);
+            const dados = enviarForm(e);
+            const novaCifra: Cifra = {
+              id: crypto.randomUUID(),
+              nome: dados.nome,
+              link: dados.link,
+            };
+            setCifras((anteriores) => [...anteriores, novaCifra]);
+            console.log(Cifras);
             setFormulario(false);
           }}
         ></Formulario>
       )}
+      <ListaCifras cifras={Cifras}></ListaCifras>
     </main>
   );
 }
