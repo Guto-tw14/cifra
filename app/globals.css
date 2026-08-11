@@ -58,3 +58,8 @@ button {
   -webkit-user-select: none; /* Safari */
   user-select: none;
 }
+
+b {
+  color: white;
+  font-weight: bolder;
+}
