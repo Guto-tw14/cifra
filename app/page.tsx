@@ -17,9 +17,10 @@ type cifraFormErrors = Partial<Record<keyof cifraformData, string>>;
 type cifraFormTouched = Partial<Record<keyof cifraformData, boolean>>;
 
 function Icone({ src, alt, x, y, className = '' }: iconeProps) {
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
     return (
         <Image
-            src={src}
+            src={`${basePath}${src}`}
             alt={alt}
             width={x}
             height={y}

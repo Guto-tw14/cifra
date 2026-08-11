@@ -1,41 +1,43 @@
-name: Deploy
+name: Deploy Next.js
 
 on:
-  push:
-    branches: ["main"]
+    push:
+        branches: ['main']
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+    contents: read
+    pages: write
+    id-token: write
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+    deploy:
+        runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v5
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
+            - name: Setup Node
+              uses: actions/setup-node@v5
+              with:
+                  node-version: 24
+                  cache: npm
 
-      - name: Install dependencies
-        run: npm ci
+            - name: Install dependencies
+              run: npm ci
 
-      - name: Build
-        run: npm run build
+            - name: Build
+              run: npm run build
+              env:
+                  NEXT_PUBLIC_BASE_PATH: /cifra
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+            - name: Setup Pages
+              uses: actions/configure-pages@v6
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./out
+            - name: Upload artifact
+              uses: actions/upload-pages-artifact@v4
+              with:
+                  path: ./out
 
-      - name: Deploy
-        uses: actions/deploy-pages@v4
+            - name: Deploy
+              uses: actions/deploy-pages@v5

@@ -1,11 +1,10 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: "/cifra",
-  images: {
-    unoptimized: true,
-  },
+    output: 'export',
+    images: {
+        unoptimized: true,
+    },
 };
 
 export default nextConfig;
