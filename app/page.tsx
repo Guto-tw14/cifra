@@ -9,19 +9,20 @@ type iconeProps = {
   alt: string;
   x: number;
   y: number;
+  className?: string;
 };
 
 type cifraformData = Omit<Cifra, "id">;
 type cifraFormErrors = Partial<Record<keyof cifraformData, string>>;
 type cifraFormTouched = Partial<Record<keyof cifraformData, boolean>>;
 
-function Icone({ src, alt, x, y }: iconeProps) {
-  return <Image src={src} alt={alt} width={x} height={y} draggable={false} />;
+function Icone({ src, alt, x, y, className="" }: iconeProps) {
+  return <Image src={src} alt={alt} width={x} height={y} draggable={false} className={"icone"+className}/>;
 }
 function MenuPesquisa() {
   return (
     <div className="flex gap-3 items-center h-full">
-      <div className="flex bg-bg-card p-2 rounded-lg gap-1 h-10/12 focus-within:bg-bg-elevated border-1 border-border-subtle">
+      <div className="flex bg-bg-card p-2 rounded-lg gap-1 h-10/12 focus-within:bg-bg-elevated border border-border-subtle">
         <Icone
           x={40}
           y={40}
@@ -34,7 +35,7 @@ function MenuPesquisa() {
           className="w-full focus:outline-0 text-text-main"
         />
       </div>
-      <button>
+      <button className="active:bg-bg-elevated p-1 rounded-lg">
         <Icone x={40} y={40} src="/sliders-solid-full.svg" alt="Filtros" />
       </button>
     </div>
@@ -45,10 +46,12 @@ function Cabecalho({ abrirForm }: { abrirForm: (valor: boolean) => void }) {
     <header className="flex gap-6 justify-center rounded-lg h-14 items-center bg-bg-card p-1">
       <div
         className=" flex rounded-full bg-main-active h-fit align-middle
-                transition-transform duration-300 ease-in-out hover:scale-110 active:scale-110"
+                transition-transform duration-300 ease-in-out hover:scale-110 active:scale-110
+                not-dark:bg-main
+                "
       >
         <button className="p-1" onClick={() => abrirForm(true)}>
-          <Icone x={40} y={40} src="/plus-solid-full.svg" alt="Criar cifra" />
+          <Icone x={40} y={40} src="/plus-solid-full.svg" alt="Criar cifra" className="Branco"/>
         </button>
       </div>
       <MenuPesquisa />
@@ -197,7 +200,7 @@ function ListaCifras({ cifras }: { cifras: Cifra[] }) {
     <section className="flex flex-col gap-1 text-text-main rounded-md p-1">
       {cifras.map((cifra) => (
         <div key={cifra.id} className="flex w-full">
-          <button className="rounded-lg bg-bg-card p-2">
+          <button className="rounded-lg bg-bg-card active:bg-bg-elevated p-2">
             <Icone
               x={40}
               y={40}
@@ -208,7 +211,7 @@ function ListaCifras({ cifras }: { cifras: Cifra[] }) {
           <a
             href={cifra.link}
             target="_blank"
-            className="grow flex flex-col justify-start ml-1 rounded-md bg-bg-card p-2"
+            className="grow flex flex-col justify-start ml-1 rounded-md bg-bg-card p-2 active:bg-bg-elevated"
           >
             <span className="text-xl">{cifra.nome}</span>
             <span className="text-sm text-text-subtle">{cifra.autor}</span>

@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+.icone, .iconeBranco {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(9%) saturate(1672%)
+    hue-rotate(176deg) brightness(100%) contrast(98%);
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     --color-main: var(--color-cyan-600);
@@ -16,10 +21,10 @@
     --color-text-main: var(--color-slate-900);
     --color-text-muted: var(--color-slate-600);
     --color-text-subtle: var(--color-slate-400);
-
-    --color-error: var(--color-red-500);
-    --color-success: var(--color-green-600);
-    --color-warning: var(--color-yellow-500);
+  }
+  .icone {
+    filter: brightness(0) saturate(100%) invert(8%) sepia(8%) saturate(4671%)
+      hue-rotate(187deg) brightness(92%) contrast(98%);
   }
 }
 
@@ -38,10 +43,6 @@
   --color-text-main: var(--color-slate-50);
   --color-text-muted: var(--color-slate-400);
   --color-text-subtle: var(--color-slate-500);
-
-  --color-error: var(--color-red-500);
-  --color-success: var(--color-green-500);
-  --color-warning: var(--color-yellow-500);
 }
 
 body {
