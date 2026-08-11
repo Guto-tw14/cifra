@@ -1,8 +1,8 @@
 'use client';
-import React, { ChangeEvent, ReactNode } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { Cifra } from '@/app/cifra';
-import { useState } from 'react';
+import { Cifra } from '@/app/db';
+import { db } from '@/app/db';
 
 type iconeProps = {
     src: string;
@@ -256,14 +256,16 @@ function ListaCifras({
             }
             elementos.push(texto.slice(inicio, indice));
             elementos.push(
-                <b key={indice}>{texto.slice(indice, indice + pesquisa.length)}</b>
+                <b key={indice}>
+                    {texto.slice(indice, indice + pesquisa.length)}
+                </b>,
             );
             inicio = indice + pesquisa.length;
         }
         return elementos;
     }
     return (
-        <section className="flex flex-col gap-1 text-text-main rounded-md p-1">
+        <section className="flex flex-col gap-1 text-text-main rounded-md">
             {cifras.map((cifra) => (
                 <div key={cifra.id} className="flex w-full">
                     <button className="rounded-lg bg-bg-card active:bg-bg-elevated p-2">
@@ -300,6 +302,13 @@ export default function Main() {
     const [formulario, setFormulario] = useState(false);
     const [Cifras, setCifras] = useState<Cifra[]>([]);
     const [Pesquisa, setPesquisa] = useState('');
+
+    useEffect(() => {
+        db.cifras.toArray().then((cifras) => {
+            setCifras(cifras);
+        });
+    }, []);
+
     const cifrasFiltradas = Cifras.filter(
         (cifra) =>
             cifra.nome.toLowerCase().includes(Pesquisa.toLowerCase()) ||
@@ -320,7 +329,7 @@ export default function Main() {
             {formulario && (
                 <Formulario
                     fecharForm={() => setFormulario(false)}
-                    enviarForm={(e) => {
+                    enviarForm={async (e) => {
                         const dados = enviarForm(e);
                         const novaCifra: Cifra = {
                             id: crypto.randomUUID(),
@@ -328,6 +337,9 @@ export default function Main() {
                             link: dados.link,
                             autor: dados.autor || 'desconhecido',
                         };
+
+                        await db.cifras.add(novaCifra);
+
                         setCifras((anteriores) => [...anteriores, novaCifra]);
                         setFormulario(false);
                     }}
