@@ -63,3 +63,11 @@ b {
   color: white;
   font-weight: bolder;
 }
+
+img {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -ms-user-select: none;
+}

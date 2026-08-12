@@ -232,12 +232,45 @@ function Formulario({
         </div>
     );
 }
+
+function Opcoes({opcoes}: {opcoes: () => void}) {
+    return (
+        <div
+            className="fixed inset-0 bg-bg/50
+        flex flex-col justify-end"
+        >
+            <section className="bg-bg-card flex flex-col justify-start p-5 gap-3 text-text-main">
+                <div className='flex justify-between'>
+                    <span>Nome Cifra</span>
+                    <button onClick={opcoes}>X</button>
+                </div>
+                <div className='flex flex-col justify-start p-5 gap-3'>
+                    <button
+                        type="button"
+                        className="rounded-md px-3 py-2 border border-border active:bg-bg-elevated"
+                    >
+                        Editar
+                    </button>
+                    <button
+                        type="button"
+                        className="rounded-md px-3 py-2 bg-red-500 active:bg-red-600"
+                    >
+                        Deletar
+                    </button>
+                </div>
+            </section>
+        </div>
+    );
+}
+
 function ListaCifras({
     cifras,
     pesquisa,
+    opcoes,
 }: {
     cifras: Cifra[];
     pesquisa: string;
+    opcoes: () => void;
 }) {
     function destacarPesquisa(texto: string, pesquisa: string) {
         if (pesquisa.trim() == '') {
@@ -269,7 +302,10 @@ function ListaCifras({
         <section className="flex flex-col gap-1 text-text-main rounded-md">
             {cifras.map((cifra) => (
                 <div key={cifra.id} className="flex w-full">
-                    <button className="rounded-lg bg-bg-card active:bg-bg-elevated p-2">
+                    <button
+                        onClick={opcoes}
+                        className="rounded-lg bg-bg-card active:bg-bg-elevated p-2"
+                    >
                         <Icone
                             x={40}
                             y={40}
@@ -303,6 +339,7 @@ export default function Main() {
     const [formulario, setFormulario] = useState(false);
     const [Cifras, setCifras] = useState<Cifra[]>([]);
     const [Pesquisa, setPesquisa] = useState('');
+    const [opcoes, setOpcoes] = useState(false);
 
     useEffect(() => {
         db.cifras.toArray().then((cifras) => {
@@ -349,7 +386,13 @@ export default function Main() {
             <ListaCifras
                 cifras={cifrasFiltradas}
                 pesquisa={Pesquisa}
+                opcoes={() => {
+                    setOpcoes(true);
+                }}
             ></ListaCifras>
+            {opcoes && <Opcoes
+            opcoes={() => {setOpcoes(false)}}
+            ></Opcoes>}
         </main>
     );
 }

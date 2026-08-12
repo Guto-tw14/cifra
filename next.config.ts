@@ -2,7 +2,8 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
     output: 'export',
-    basePath: "/cifra",
+    //comentar para rodar local: basePath: '/cifra',
+    // basePath: '/cifra',
     images: {
         unoptimized: true,
     },
