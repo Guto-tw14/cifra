@@ -1,18 +1,9 @@
 import { Dexie, type EntityTable } from 'dexie';
+import { type cifra } from '@/app/types'
 
-type Cifra = {
-    id: string;
-    nome: string;
-    link: string;
-    autor: string;
-};
-
-const db = new Dexie('cifraDb') as Dexie & {
-    cifras: EntityTable<Cifra, 'id'>;
+export const db = new Dexie('cifraDb') as Dexie & {
+    cifras: EntityTable<cifra, 'id'>;
 };
 db.version(1).stores({
-    cifras: 'id, nome, link, autor',
+    cifras: 'id, name, link, autor',
 });
-
-export type { Cifra };
-export { db };
