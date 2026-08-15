@@ -10,15 +10,14 @@ export default function Main() {
     const [form, setForm] = useState(false);
     const [options, setOptions] = useState(false);
     const [search, setSearch] = useState('');
+    const [selectedCifra, setSelectedCifra] = useState<string | null>(null);
 
-    const { cifras, addCifra } = useCifras();
+    const { cifras, addCifra, deleteCifra } = useCifras();
 
     const filterCifras = cifras.filter(
         (cifra) =>
             cifra.name.toLowerCase().includes(search.toLowerCase()) ||
-            cifra.autor
-                ?.toLocaleLowerCase()
-                .includes(search.toLowerCase()),
+            cifra.autor?.toLocaleLowerCase().includes(search.toLowerCase()),
     );
 
     return (
@@ -37,12 +36,20 @@ export default function Main() {
             <ListCifras
                 cifras={filterCifras}
                 search={search}
-                options={() => {
+                options={(id) => {
+                    setSelectedCifra(id);
                     setOptions(true);
                 }}
             ></ListCifras>
-            {options && (
-                <Options closeOptions={() => setOptions(false)}></Options>
+            {options && selectedCifra && (
+                <Options
+                    id={selectedCifra}
+                    closeOptions={() => setOptions(false)}
+                    deleteCifra={(id) => {
+                        deleteCifra(id)
+                        setSelectedCifra(null)
+                    }}
+                ></Options>
             )}
         </main>
     );

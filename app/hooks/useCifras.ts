@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { db } from '@/app/db';
-import {type cifraFormData} from '@/app/types'
-import {type cifra} from '@/app/types'
+import { type cifraFormData } from '@/app/types';
+import { type cifra } from '@/app/types';
 
 export function useCifras() {
     const [cifras, setCifras] = useState<cifra[]>([]);
@@ -24,8 +24,11 @@ export function useCifras() {
         setCifras((old) => [...old, cifra]);
     }
 
-    return {
-        cifras,
-        addCifra,
-    };
+    async function deleteCifra(id: string) {
+        db.cifras.delete(id);
+
+        setCifras((old) => old.filter((cifra) => id != cifra.id));
+    }
+
+    return { cifras, addCifra, deleteCifra };
 }

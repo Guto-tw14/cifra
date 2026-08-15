@@ -1,4 +1,4 @@
-import { Cifra } from '@/app/db'
+import { cifra } from '@/app/types'
 import { Icon } from '@/app/components/Icon'
 
 export function ListCifras({
@@ -6,9 +6,9 @@ export function ListCifras({
     search,
     options,
 }: {
-    cifras: Cifra[];
+    cifras: cifra[];
     search: string;
-    options: () => void;
+    options: (id: string) => void;
 }) {
     function markSearch(text: string, search: string) {
         if (search.trim() == '') {
@@ -41,7 +41,7 @@ export function ListCifras({
             {cifras.map((cifra) => (
                 <div key={cifra.id} className="flex w-full">
                     <button
-                        onClick={options}
+                        onClick={() => {options(cifra.id)}}
                         className="rounded-lg bg-bg-card active:bg-bg-elevated p-2"
                     >
                         <Icon
