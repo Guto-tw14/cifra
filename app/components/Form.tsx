@@ -98,7 +98,7 @@ export function Form({
     return (
         <div
             className="fixed inset-0 bg-bg/50
-        flex flex-col justify-center items-center
+        flex flex-col justify-center items-center z-1
         "
         >
             <form

@@ -37,7 +37,7 @@ export function ListCifras({
         return elements;
     }
     return (
-        <section className="flex flex-col gap-1 text-text-main rounded-md">
+        <section className="flex flex-col gap-1 text-text-main rounded-md overflow-y-auto">
             {cifras.map((cifra) => (
                 <div key={cifra.id} className="flex w-full">
                     <button

@@ -21,7 +21,7 @@ export default function Main() {
     );
 
     return (
-        <main className="flex flex-col p-1 gap-1 min-h-screen bg-bg">
+        <main className="flex flex-col p-1 gap-1 h-screen bg-bg overflow-hidden">
             <Header openForm={setForm} searchChange={setSearch} />
 
             {form && (

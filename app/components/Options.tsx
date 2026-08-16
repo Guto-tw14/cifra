@@ -10,7 +10,7 @@ export function Options({
     return (
         <div
             className="fixed inset-0 bg-bg/50
-        flex flex-col justify-end"
+        flex flex-col justify-end z-1"
         >
             <section className="bg-bg-card flex flex-col justify-start p-5 gap-3 text-text-main">
                 <div className="flex justify-between">
