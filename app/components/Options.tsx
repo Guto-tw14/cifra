@@ -1,38 +1,44 @@
+import { Icon } from "@/app/components/Icon";
+
 export function Options({
-    closeOptions,
-    deleteCifra,
-    id,
+  closeOptions,
+  deleteCifra,
+  name,
 }: {
-    closeOptions: () => void;
-    deleteCifra: (id: string) => void;
-    id: string;
+  closeOptions: () => void;
+  deleteCifra: () => void;
+  name: string;
 }) {
-    return (
-        <div
-            className="fixed inset-0 bg-bg/50
+  return (
+    <div
+      className="fixed inset-0 bg-bg/50
         flex flex-col justify-end z-1"
-        >
-            <section className="bg-bg-card flex flex-col justify-start p-5 gap-3 text-text-main">
-                <div className="flex justify-between">
-                    <span>Nome Cifra</span>
-                    <button onClick={closeOptions}>X</button>
-                </div>
-                <div className="flex flex-col justify-start p-5 gap-3">
-                    <button
-                        type="button"
-                        className="rounded-md px-3 py-2 border border-border active:bg-bg-elevated"
-                    >
-                        Editar
-                    </button>
-                    <button
-                        onClick={() => {deleteCifra(id)}}
-                        type="button"
-                        className="rounded-md px-3 py-2 bg-red-500 active:bg-red-600"
-                    >
-                        Deletar
-                    </button>
-                </div>
-            </section>
+    >
+      <section className="bg-bg-card flex flex-col justify-start p-5 gap-3 text-text-main">
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl">{name}</h2>
+          <button className="active:bg-bg-elevated p-1 rounded-lg" onClick={closeOptions}>
+            <Icon x={30} y={30} src="/x-solid-full.svg" alt="X" />
+          </button>
         </div>
-    );
+        <div className="flex flex-col justify-start p-5 gap-3">
+          <button
+            type="button"
+            className="rounded-md px-3 py-2 border border-border active:bg-bg-elevated"
+          >
+            Editar
+          </button>
+          <button
+            onClick={() => {
+              deleteCifra();
+            }}
+            type="button"
+            className="rounded-md px-3 py-2 bg-red-500 active:bg-red-600"
+          >
+            Deletar
+          </button>
+        </div>
+      </section>
+    </div>
+  );
 }
