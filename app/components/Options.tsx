@@ -13,11 +13,19 @@ export function Options({
     <div
       className="fixed inset-0 bg-bg/50
         flex flex-col justify-end z-1"
+      onClick={() => {
+        closeOptions();
+      }}
     >
-      <section className="bg-bg-card flex flex-col justify-start p-5 gap-3 text-text-main">
+      <section className="bg-bg-card flex flex-col justify-start p-5 gap-3 text-text-main"
+      onClick={(e) => {e.stopPropagation()}}
+      >
         <div className="flex justify-between items-center">
           <h2 className="text-2xl">{name}</h2>
-          <button className="active:bg-bg-elevated p-1 rounded-lg" onClick={closeOptions}>
+          <button
+            className="active:bg-bg-elevated p-1 rounded-lg min-w-10"
+            onClick={closeOptions}
+          >
             <Icon x={30} y={30} src="/x-solid-full.svg" alt="X" />
           </button>
         </div>
@@ -29,7 +37,7 @@ export function Options({
             Editar
           </button>
           <button
-            onClick={() => {
+            onClick={(e) => {
               deleteCifra();
             }}
             type="button"

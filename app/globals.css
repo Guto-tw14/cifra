@@ -5,6 +5,11 @@
     hue-rotate(176deg) brightness(100%) contrast(98%);
 }
 
+*{
+  text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     --color-main: var(--color-cyan-600);

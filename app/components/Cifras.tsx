@@ -42,7 +42,7 @@ export function ListCifras({
                 <div key={cifra.id} className="flex w-full">
                     <button
                         onClick={() => {options(cifra.id)}}
-                        className="rounded-lg bg-bg-card active:bg-bg-elevated p-2"
+                        className="rounded-lg bg-bg-card active:bg-bg-elevated p-2 min-w-14"
                     >
                         <Icon
                             x={40}
