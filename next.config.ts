@@ -1,5 +1,10 @@
 import type { NextConfig } from 'next';
-const { withPWA } = require('@swavoti/next-pwa');
+import withSerwistInit from '@serwist/next';
+
+const withSerwist = withSerwistInit ({
+    swSrc: 'app/sw.ts',
+    swDest: 'public/sw.js',
+});
 
 const nextConfig: NextConfig = {
     output: 'export',
@@ -10,4 +15,4 @@ const nextConfig: NextConfig = {
     },
 };
 
-export default withPWA(nextConfig);
+export default withSerwist(nextConfig);

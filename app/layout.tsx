@@ -13,7 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'Cifra'
+    manifest: '/manifest.json',
+    title: 'Cifra',
+    themeColor: '#020618',
 };
 
 export default function RootLayout({
@@ -26,7 +28,6 @@ export default function RootLayout({
             lang="pt-br"
             className={`${geistSans.variable} ${geistMono.variable} h-full antialiased bg-bg`}
         >
-            <meta name="theme-color" content="#020618" />
             <body className="min-h-full w-full flex flex-col justify-content-center bg-bg">
                 {children}
             </body>

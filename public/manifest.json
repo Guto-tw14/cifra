@@ -1,0 +1,10 @@
+{
+    "name": "Cifras",
+    "short_name": "Cifras",
+    "start_url": "/cifra/",
+    "scope": "/cifra/",
+    "display": "standalone",
+    "background_color": "#020618",
+    "theme_color": "#020618",
+    "lang": "pt-BR"
+}
