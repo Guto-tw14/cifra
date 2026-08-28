@@ -97,7 +97,7 @@ export function Form({
   return (
     <div
       className="fixed inset-0 bg-bg/50
-        flex flex-col justify-center items-center z-1
+        flex flex-col justify-center items-center z-10
         "
       onClick={closeForm}
     >
@@ -149,7 +149,7 @@ export function Form({
             Cancelar
           </button>
           <button className="text-black bg-main rounded-md px-3 py-2 active:bg-main-active">
-            Adicionar
+            {filledFields == undefined ? "Adicionar" : "Editar"}
           </button>
         </div>
       </form>

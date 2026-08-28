@@ -34,6 +34,7 @@ export default function Main() {
           submitForm={async (values) => {
             if (form == "edit" && selectedCifra) {
               await editCifra(selectedCifra, values);
+              setOptions(false)
             } else {
               await addCifra(values);
             }

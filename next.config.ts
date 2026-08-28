@@ -9,7 +9,7 @@ const withSerwist = withSerwistInit ({
 const nextConfig: NextConfig = {
     output: 'export',
     //comentar para rodar local: basePath: '/cifra',
-    // basePath: '/cifra',
+    basePath: '/cifra',
     images: {
         unoptimized: true,
     },
