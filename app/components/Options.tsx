@@ -3,10 +3,12 @@ import { Icon } from "@/app/components/Icon";
 export function Options({
   closeOptions,
   deleteCifra,
+  editCifra,
   name,
 }: {
   closeOptions: () => void;
   deleteCifra: () => void;
+  editCifra: () => void;
   name: string;
 }) {
   return (
@@ -31,13 +33,16 @@ export function Options({
         </div>
         <div className="flex flex-col justify-start p-5 gap-3">
           <button
+          onClick={() => {
+            editCifra();
+          }}
             type="button"
             className="rounded-md px-3 py-2 border border-border active:bg-bg-elevated"
           >
             Editar
           </button>
           <button
-            onClick={(e) => {
+            onClick={() => {
               deleteCifra();
             }}
             type="button"

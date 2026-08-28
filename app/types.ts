@@ -8,3 +8,5 @@ export type cifra = {
 export type cifraFormData = Omit<cifra, 'id'>;
 export type cifraFormErrors = Partial<Record<keyof cifraFormData, string>>;
 export type cifraFormTouched = Partial<Record<keyof cifraFormData, boolean>>;
+export type cifraFields = Partial<cifraFormData>
+export type FormMode = "add" | "edit" | null;

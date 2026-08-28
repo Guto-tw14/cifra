@@ -37,7 +37,7 @@ export function Header({
     openForm,
     searchChange,
 }: {
-    openForm: (value: boolean) => void;
+    openForm: () => void;
     searchChange: (value: string) => void;
 }) {
     return (
@@ -48,7 +48,7 @@ export function Header({
                 not-dark:bg-main
                 "
             >
-                <button className="p-1" onClick={() => openForm(true)}>
+                <button className="p-1" onClick={() => openForm()}>
                     <Icon
                         x={40}
                         y={40}

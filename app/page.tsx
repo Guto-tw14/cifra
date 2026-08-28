@@ -6,15 +6,16 @@ import { ListCifras } from "@/app/components/Cifras";
 import { Options } from "@/app/components/Options";
 import { useCifras } from "@/app/hooks/useCifras";
 import { Confirm } from "@/app/components/Confirm";
+import { cifraFormData, FormMode } from "./types";
 
 export default function Main() {
-  const [form, setForm] = useState(false);
+  const [form, setFormMode] = useState<FormMode>(null);
   const [options, setOptions] = useState(false);
   const [confirm, setConfirm] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedCifra, setSelectedCifra] = useState<string | null>(null);
 
-  const { cifras, addCifra, deleteCifra } = useCifras();
+  const { cifras, addCifra, deleteCifra, editCifra } = useCifras();
 
   const filterCifras = cifras.filter(
     (cifra) =>
@@ -24,16 +25,21 @@ export default function Main() {
 
   return (
     <main className="flex flex-col p-1 gap-1 h-screen bg-bg overflow-hidden">
-      <Header openForm={setForm} searchChange={setSearch} />
+      <Header openForm={() => setFormMode("add")} searchChange={setSearch} />
 
       {form && (
         <Form
-          closeForm={() => setForm(false)}
+          closeForm={() => setFormMode(null)}
+          filledFields={form == "edit" ? cifras.find(cifra => cifra.id == selectedCifra) : undefined}
           submitForm={async (values) => {
-            await addCifra(values);
-            setForm(false);
+            if (form == "edit" && selectedCifra) {
+              await editCifra(selectedCifra, values);
+            } else {
+              await addCifra(values);
+            }
+            setFormMode(null);
           }}
-        ></Form>
+        />
       )}
       <ListCifras
         cifras={filterCifras}
@@ -45,24 +51,29 @@ export default function Main() {
       ></ListCifras>
       {options && selectedCifra && (
         <Options
-        name={cifras.find((cifra) => cifra.id == selectedCifra)?.name || "Cifra"}
+          name={
+            cifras.find((cifra) => cifra.id == selectedCifra)?.name || "Cifra"
+          }
           closeOptions={() => setOptions(false)}
           deleteCifra={() => {
-            setConfirm(true)
+            setConfirm(true);
+          }}
+          editCifra={() => {
+            setFormMode('edit')
           }}
         ></Options>
       )}
       {confirm && selectedCifra && (
         <Confirm
-        confirm={() => {
-            deleteCifra(selectedCifra)
-            setSelectedCifra(null)
-            setConfirm(false)
-        }}
-        cancel={() => {
-            setConfirm(false)
-        }}
-        text="Você tem certeza?"
+          confirm={() => {
+            deleteCifra(selectedCifra);
+            setSelectedCifra(null);
+            setConfirm(false);
+          }}
+          cancel={() => {
+            setConfirm(false);
+          }}
+          text="Você tem certeza?"
         ></Confirm>
       )}
     </main>

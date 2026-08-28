@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import { type cifraFormData } from "@/app/types";
+import { cifraFields, type cifraFormData } from "@/app/types";
 import { type cifraFormErrors } from "@/app/types";
 import { type cifraFormTouched } from "@/app/types";
 
@@ -30,14 +30,16 @@ const fields = [
 export function Form({
   closeForm,
   submitForm,
+  filledFields,
 }: {
   closeForm: () => void;
   submitForm: (data: cifraFormData) => void;
+  filledFields?: cifraFields;
 }) {
   const [formData, setFormData] = useState<cifraFormData>({
-    name: "",
-    link: "",
-    autor: "",
+    name: filledFields?.name ?? "",
+    link: filledFields?.link ?? "",
+    autor: filledFields?.autor ?? "",
   });
   const [errors, setErrors] = useState<cifraFormErrors>({});
   const [touched, setTouched] = useState<cifraFormTouched>({});
@@ -102,7 +104,9 @@ export function Form({
       <form
         className="bg-bg-card p-6 rounded-lg flex flex-col gap-5 min-w-80 text-text-main"
         onSubmit={handleSubmit}
-        onClick={(e) => {e.stopPropagation()}}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
       >
         <header className="flex w-full justify-center">
           <h2 className="justify-self-center text-4xl">Adicionar Cifra</h2>
@@ -115,6 +119,7 @@ export function Form({
                 {field.required && <span className="text-red-500">*</span>}
               </div>
               <input
+                autoCapitalize={field.name != "link" ? "words" : "off"}
                 autoComplete="off"
                 name={field.name}
                 type={field.type}
